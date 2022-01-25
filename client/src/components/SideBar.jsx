@@ -1,25 +1,37 @@
-import React,{useState,useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux'
-import {searchByName} from '../actions/Actions'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { ordenDc, orderAz, searchByName } from '../actions/Actions'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
-import {Dog} from './Dog'
+import { Dog } from './Dog'
 
 export const SideBar = () => {
 
-    const navigate= useNavigate()
-    const location =useLocation()
-    const dispatch=useDispatch();
-    
-    const [searchText,setSearchText]=useState('')
-    
-    useEffect(()=>{
-    dispatch(searchByName(searchText))
-    },[searchText])
+    const dispatch = useDispatch();
 
+    const [searchText, setSearchText] = useState('')
+    
+    const [select,setSelect]=useState('')
 
-    const handleInputChange=(e)=>{
+    useEffect(() => {
+        dispatch(searchByName(searchText))
+    }, [searchText])
+
+    useEffect(() => {
+        dispatch(orderAz())
+    //   if(select==='asc'){
+    //       dispatch(orderAz())
+    //   }else{
+    //       dispatch(ordenDc())
+    //   }
+    }, [select]);
+    
+    const handleInputChange = (e) => {
         setSearchText(e.target.value)
+    }
+
+    const handleOrden=(e)=>{
+        setSelect(e.target.value)
     }
 
 
@@ -35,7 +47,7 @@ export const SideBar = () => {
                         onChange={handleInputChange}
                         autoComplete='off'
                     />
-                    
+
                     <button className='buttonSide'
                         type='submit'>
                         buscar
@@ -47,7 +59,7 @@ export const SideBar = () => {
                         <option value="allDb">Creados</option>
                         <option value="allApi">de la api</option>
                     </select>
-                    <select className='Az-Dc'>
+                    <select className='Az-Dc'onChange={handleOrden}>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                     </select>

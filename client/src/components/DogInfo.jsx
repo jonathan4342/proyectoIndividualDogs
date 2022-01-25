@@ -39,8 +39,9 @@ export const DogInfo = () => {
                         <h1>{dogs?.data.name}</h1>
                         <img src={dogs?.data.img} alt="img not fount" width='200px' heigth='300px' />
                         <h3>Temperamentos: {dogs?.data.temperamento}</h3>
-                        <h3>{dogs?.data.peso.metric} Kg</h3>
-                        <h3>{dogs?.data.altura.metric} Mtrs</h3>
+                        <h3>Peso: {dogs?.data.peso.metric} Kg</h3>
+                        <h3>Altura: {dogs?.data.altura.metric} Mtrs</h3>
+                        <h3>Años de vida: {dogs?.data.años_de_vida}</h3>
                         <button onClick={handleVolver}>Volver</button>
                     </>
                 )

@@ -28,6 +28,16 @@ function rootReducer(state=inicialState,action){
                 searchDog:action.payload
                 // dogs:state.dogs.filter(el=>(el.name.toLowerCase().includes(action.payload.toLowerCase())))
             }
+            case 'ORDER_DC':
+                return{
+                    ...state,
+                    dogs:state.dogs.reverse()
+                }
+            case 'ORDER_AZ':
+                return{
+                    ...state,
+                    dogs:state.dogs.reverse()
+                }
         default:
             return state;
     }

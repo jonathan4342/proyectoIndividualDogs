@@ -35,3 +35,15 @@ export function searchByName(name){
         payload:name
     }
 }
+
+export function ordenDc(){
+    return {
+        type:'ORDER_DC',
+    }
+}
+
+export function orderAz(){
+    return {
+        type:'ORDER_AZ'
+    }
+}
