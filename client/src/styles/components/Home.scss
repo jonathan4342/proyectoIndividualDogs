@@ -1,0 +1,29 @@
+.formConten{
+    display: flex;
+    background-color: #0F4C75;
+    gap: 3rem;
+    padding: 1rem .5rem;
+}
+.buttonSide{
+    cursor:pointer
+}
+.buttonCrear{
+    cursor:pointer
+}
+.containerDog{
+    // display: flex;
+    // align-items: flex-start;
+    // gap: 3rem;
+    padding-left: 3rem;
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.dog{
+    background-color:#BBE1FA;
+    width:300px;
+    padding: 10px 20px;
+    margin: 10% auto;
+    position: relative;
+  }
+
+
