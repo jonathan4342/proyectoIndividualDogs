@@ -25,6 +25,9 @@ router.get('/dogs',async(req,res)=>{
                         altura:el.height
                     }
                 })
+                const createDb= await Dog.findAll();
+                
+                
                 if(raza){
                     allDogs=allDogs.find(el=>(el.name.includes(raza)))
                     if(!allDogs){
@@ -33,7 +36,8 @@ router.get('/dogs',async(req,res)=>{
                     return res.status(200).json(allDogs)
                 }
                 else{
-                    res.json(allDogs)
+                    
+                    res.json([...allDogs,...createDb])
                 }
                 
                 
@@ -45,7 +49,7 @@ router.get('/dogs',async(req,res)=>{
 
 router.get('/dogs/:idRaza',async (req,res)=>{
     const {idRaza}=req.params
-    console.log(idRaza)
+    
      try {
             const {data}=await axios.get(`https://api.thedogapi.com/v1/breeds`)
             

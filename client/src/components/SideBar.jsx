@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { ordenDc, orderAz, searchByName } from '../actions/Actions'
+import { orderAz, searchByName,ordenCreados } from '../actions/Actions'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from '../hooks/useForm';
 import { Dog } from './Dog'
@@ -19,11 +19,6 @@ export const SideBar = () => {
 
     useEffect(() => {
         dispatch(orderAz())
-    //   if(select==='asc'){
-    //       dispatch(orderAz())
-    //   }else{
-    //       dispatch(ordenDc())
-    //   }
     }, [select]);
     
     const handleInputChange = (e) => {
@@ -33,8 +28,11 @@ export const SideBar = () => {
     const handleOrden=(e)=>{
         setSelect(e.target.value)
     }
-
-
+    const handleOrdenCreados=(e)=>{
+        dispatch(ordenCreados(e.target.value))
+        console.log(e.target.value)
+    }
+    
     return (
         <div className='Sidebarcontainer'>
             <form className='formConten'>
@@ -53,11 +51,11 @@ export const SideBar = () => {
                         buscar
                     </button>
                 </div>
-                <div className='contenedor2'>
-                    <select className="dogs" >
-                        <option value="all">Todos</option>
-                        <option value="allDb">Creados</option>
-                        <option value="allApi">de la api</option>
+                <div className='contenedor2' >
+                    <select className="dogs" onChange={handleOrdenCreados} >
+                        <option value="All">Todos</option>
+                        <option value="Db">Creados</option>
+                        <option value="Api">de la api</option>
                     </select>
                     <select className='Az-Dc'onChange={handleOrden}>
                         <option value="asc">A-Z</option>

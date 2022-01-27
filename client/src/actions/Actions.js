@@ -36,14 +36,15 @@ export function searchByName(name){
     }
 }
 
-export function ordenDc(){
-    return {
-        type:'ORDER_DC',
-    }
-}
-
 export function orderAz(){
     return {
         type:'ORDER_AZ'
+    }
+}
+
+export function ordenCreados(value){
+    return{
+        type:'ORDEN_CREADOS',
+        payload:value
     }
 }
