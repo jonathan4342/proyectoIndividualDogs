@@ -1,7 +1,10 @@
 const inicialState = {
     dogs: [],
+    filterDogs: [],
     dogActivo: null,
-    searchDog: ''
+    searchDog: '',
+    temperamentos: []
+
 }
 
 function rootReducer(state = inicialState, action) {
@@ -10,7 +13,8 @@ function rootReducer(state = inicialState, action) {
         case 'GET_RAZA':
             return {
                 ...state,
-                dogs: action.payload
+                dogs: action.payload,
+                    filterDogs: action.payload
             }
             case 'GET_RAZAID':
                 return {
@@ -31,16 +35,62 @@ function rootReducer(state = inicialState, action) {
                         case 'ORDER_AZ':
                             return {
                                 ...state,
-                                dogs: state.dogs.reverse()
+                                filterDogs: [...state.filterDogs.reverse()]
                             }
                             case 'ORDEN_CREADOS':
-                                const filterCreate= action.payload==='Db'? state.dogs.filter(el=>el.createdInDb): state.dogs.filter(el=>!el.createdInDb)
-                                return{
+                                const filterCreate = action.payload === 'Db' ? state.dogs.filter(el => el.createdInDb) :
+                                    action.payload === 'Api' ? state.dogs.filter(el => !el.createdInDb) : [...state.dogs]
+                                return {
                                     ...state,
-                                    dogs: action.payload=== 'All'? state.dogs: filterCreate
+                                    filterDogs: filterCreate
                                 }
-                            default:
-                                return state;
+                                case 'ORDEN_PESO':
+                                    return {
+                                        ...state,
+                                        filterDogs: [...state.dogs.sort((a, b) => {
+                                            let pesoA = a.peso.replace("NaN", "").split("-")
+                                            let pesoB = b.peso.replace("NaN", "").split("-");
+                                            if (pesoA.length === 1) {
+                                                pesoA = (Number(pesoA[0]))
+                                            } else {
+                                                pesoA = (Number(pesoA[0]) + Number(pesoA[1])) / 2;
+                                            }
+
+                                            if (pesoB.length === 1) {
+                                                pesoB = (Number(pesoB[0]))
+                                            } else {
+                                                pesoB = (Number(pesoB[0]) + Number(pesoB[1])) / 2;
+                                            }
+
+                                            return action.payload === "mayor" ? pesoB - pesoA : pesoA - pesoB;
+                                        })]
+                                    }
+                                    case 'TEMPERAMENTOS':
+                                        return {
+                                            ...state,
+                                            temperamentos: action.payload
+                                        }
+                                        case 'FILTER_TEMP':
+                                            return {
+                                                ...state,
+                                                filterDogs: state.dogs.filter(el => {
+                                                    if(action.payload){
+                                                        if(el.temperamento){
+                                                            return el.temperamento?.toLowerCase().includes(action.payload.toLowerCase())
+                                                        }
+                                                        else if(el.temperamentos){
+                                                           let temp= el.temperamentos.map(el=>el.name)
+                                                           return temp.includes(action.payload)
+                                                        }
+                                                    }
+                                                    else{
+                                                        return true
+                                                    }
+                                                    
+                                                })
+                                            }
+                                            default:
+                                                return state;
     }
 
 

@@ -48,3 +48,36 @@ export function ordenCreados(value){
         payload:value
     }
 }
+
+export function ordenPeso(value){
+    return{
+        type:'ORDEN_PESO',
+        payload:value
+    }
+}
+
+export function getTemperamentos(){
+    return async function(dispatch){
+        var json= await axios.get(`http://localhost:3001/temperament`)
+        return dispatch({
+            type:'TEMPERAMENTOS',
+            payload:json.data
+        })
+    }
+}
+
+export function filterTemperamentos(value){
+    return{
+        type:'FILTER_TEMP',
+        payload:value
+    }
+}
+
+export function postRaza(raza){
+    return async (dispatch)=>{
+        var json= await axios.post(`http://localhost:3001/dog`,raza)
+        return dispatch({
+            
+        })
+    }
+}

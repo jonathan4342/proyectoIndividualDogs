@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { orderAz, searchByName,ordenCreados } from '../actions/Actions'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from '../hooks/useForm';
-import { Dog } from './Dog'
+import { useDispatch, useSelector } from 'react-redux';
+import { orderAz, searchByName,ordenCreados, ordenPeso, getTemperamentos, filterTemperamentos } from '../actions/Actions';
+import { Link} from 'react-router-dom';
 
 export const SideBar = () => {
 
@@ -13,6 +11,8 @@ export const SideBar = () => {
     
     const [select,setSelect]=useState('')
 
+    const {temperamentos}= useSelector((state)=>state)
+
     useEffect(() => {
         dispatch(searchByName(searchText))
     }, [searchText])
@@ -20,6 +20,11 @@ export const SideBar = () => {
     useEffect(() => {
         dispatch(orderAz())
     }, [select]);
+
+    useEffect(() => {
+      dispatch(getTemperamentos())
+    }, []);
+    
     
     const handleInputChange = (e) => {
         setSearchText(e.target.value)
@@ -30,7 +35,15 @@ export const SideBar = () => {
     }
     const handleOrdenCreados=(e)=>{
         dispatch(ordenCreados(e.target.value))
-        console.log(e.target.value)
+        
+    }
+
+    const handleOrdenMayor=(e)=>{
+        dispatch(ordenPeso(e.target.value))
+    }
+
+    const handleFilterTemp=(e)=>{
+        dispatch(filterTemperamentos(e.target.value))
     }
     
     return (
@@ -61,9 +74,18 @@ export const SideBar = () => {
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                     </select>
-                    <select className="peso" >
-                        <option value="MayorP">Mayor peso</option>
-                        <option value="MenorP">Menor peso</option>
+                    <select className="peso" onChange={handleOrdenMayor} >
+                        <option value="mayor">Mayor peso</option>
+                        <option value="menor">Menor peso</option>
+                    </select>
+                    <select className='contenedor3' defaultValue={0} onChange={handleFilterTemp}>
+                        <option value={0} disabled>Temperamentos</option>
+                        <option value="">Todos</option>
+                        {
+                            temperamentos.map(el=>(
+                                <option key={el.id} value={el.name}>{el.name}</option>
+                            ))
+                        }
                     </select>
                 </div>
                 <div className='contenedor3'>

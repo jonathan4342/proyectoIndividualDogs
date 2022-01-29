@@ -36,6 +36,18 @@ const { Dog,Temperamento } = sequelize.models;
 // Product.hasMany(Reviews);
 Dog.belongsToMany(Temperamento,{through:'dog_temperamento'})
 Temperamento.belongsToMany(Dog,{through:'dog_temperamento'})
+// Dog.associate = (models) => {
+//   Dog.belongsTo(models.Temperamento,{
+//     as:'temperamento',
+//     foreignKey:'id'
+//   })
+// }
+// Temperamento.associate = (models) => {
+//   Temperamento.belongsTo(models.Dog,{
+//     as:'dog',
+//     foreignKey:'id'
+//   })
+// }
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
