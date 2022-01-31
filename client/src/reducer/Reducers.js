@@ -30,13 +30,43 @@ function rootReducer(state = inicialState, action) {
                         return {
                             ...state,
                             searchDog: action.payload
-                            // dogs:state.dogs.filter(el=>(el.name.toLowerCase().includes(action.payload.toLowerCase())))
                         }
-                        case 'ORDER_AZ':
+                        case 'ORDEN_AZ':
                             return {
                                 ...state,
-                                filterDogs: [...state.filterDogs.reverse()]
+                                filterDogs: [...state.filterDogs.sort((a,b)=>{
+                                    let nameA= a.name.toLowerCase();
+                                    let nameB= b.name.toLowerCase();
+
+                                    if(nameA> nameB){
+                                        return 1
+                                    }
+                                    else if(nameA< nameB){
+                                        return -1
+                                    }
+                                    else{
+                                        return 0
+                                    }
+                                })]
                             }
+                            case 'ORDEN_DC':
+                                return {
+                                    ...state,
+                                    filterDogs:[...state.filterDogs.sort((a,b)=>{
+                                        let nameA=a.name.toLowerCase();
+                                        let nameB=b.name.toLowerCase();
+
+                                        if(nameA> nameB){
+                                            return -1
+                                        }
+                                        else if(nameA< nameB){
+                                            return 1
+                                        }
+                                        else{
+                                            return 0
+                                        }
+                                    })]
+                                }
                             case 'ORDEN_CREADOS':
                                 const filterCreate = action.payload === 'Db' ? state.dogs.filter(el => el.createdInDb) :
                                     action.payload === 'Api' ? state.dogs.filter(el => !el.createdInDb) : [...state.dogs]
@@ -89,6 +119,11 @@ function rootReducer(state = inicialState, action) {
                                                     
                                                 })
                                             }
+                                            case 'POST_RAZA':
+                                                return {
+                                                    ...state,
+                                                    filterDogs:[...state.dogs,action.payload]
+                                                }
                                             default:
                                                 return state;
     }

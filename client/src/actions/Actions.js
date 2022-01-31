@@ -36,9 +36,15 @@ export function searchByName(name){
     }
 }
 
-export function orderAz(){
+export function ordenAz(){
     return {
-        type:'ORDER_AZ'
+        type:'ORDEN_AZ',
+    }
+}
+
+export function ordenDc(){
+    return {
+        type:'ORDEN_DC'
     }
 }
 
@@ -74,10 +80,12 @@ export function filterTemperamentos(value){
 }
 
 export function postRaza(raza){
+   
     return async (dispatch)=>{
         var json= await axios.post(`http://localhost:3001/dog`,raza)
         return dispatch({
-            
+            type:'POST_RAZA',
+            payload:raza
         })
     }
 }

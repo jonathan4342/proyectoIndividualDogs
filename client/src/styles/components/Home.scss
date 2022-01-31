@@ -19,16 +19,28 @@
     display:grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+
 .dog{
+    display: flex;
     background-color:#BBE1FA;
     width:300px;
     padding: 10px 20px;
     margin: 10% auto;
-    position: relative;
-  }
+    border-radius: 30px;
+    align-content: center;
+    box-shadow: 5px 5px 15px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 .contenedor_img{
     display: flex;
-    
+    flex-direction: row;
+    padding: 150px;
+    gap: 5rem;
 }
+
+
+
+
 
 

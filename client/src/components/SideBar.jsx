@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { orderAz, searchByName,ordenCreados, ordenPeso, getTemperamentos, filterTemperamentos } from '../actions/Actions';
+import { ordenAz, searchByName,ordenCreados, ordenPeso, getTemperamentos, filterTemperamentos, ordenDc } from '../actions/Actions';
 import { Link} from 'react-router-dom';
 
 export const SideBar = () => {
@@ -17,9 +17,9 @@ export const SideBar = () => {
         dispatch(searchByName(searchText))
     }, [searchText])
 
-    useEffect(() => {
-        dispatch(orderAz())
-    }, [select]);
+    // useEffect(()=>{
+    //     dispatch(ordenAz())
+    // },[select])
 
     useEffect(() => {
       dispatch(getTemperamentos())
@@ -31,7 +31,12 @@ export const SideBar = () => {
     }
 
     const handleOrden=(e)=>{
-        setSelect(e.target.value)
+        if(e.target.value === 'asc'){
+            dispatch(ordenAz())
+        }
+        else {
+            dispatch(ordenDc())
+        }
     }
     const handleOrdenCreados=(e)=>{
         dispatch(ordenCreados(e.target.value))
@@ -82,7 +87,7 @@ export const SideBar = () => {
                         <option value={0} disabled>Temperamentos</option>
                         <option value="">Todos</option>
                         {
-                            temperamentos.map(el=>(
+                            temperamentos?.map(el=>(
                                 <option key={el.id} value={el.name}>{el.name}</option>
                             ))
                         }

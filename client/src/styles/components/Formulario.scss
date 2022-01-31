@@ -1,0 +1,26 @@
+.cont_{
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+}
+
+.cont_formulario{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color:#BBE1FA;
+    padding: 50px;
+    gap:.2rem;
+    border-radius: 20px;
+
+    h3{
+        margin: 0;
+    }
+    input{
+        border-radius: 4px;
+    }
+    
+        // padding: 20px;
+    // gap: 0.3rem;
+    
+}

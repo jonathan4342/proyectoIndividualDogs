@@ -1,15 +1,18 @@
 body{
-   background-color: #3282B8;
-   box-sizing: border-box;
+    background-color:#3282B8;
+    box-sizing: border-box;
 }
 .inicio{
     display: flex;
-    justify-content: center;
+    justify-content:space-around;
     align-items: center;
     height: 100vh;
     background-color:#BBE1FA;
 }
 .button{
-    border-color:#0F4C75 ;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    box-shadow: 1px 1px;
+    width: 150px;
+    border-radius: 5px;
+    font-family:  Times, serif;
+    font-size: 17px;
 }

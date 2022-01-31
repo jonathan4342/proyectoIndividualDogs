@@ -9,19 +9,9 @@ import { SideBar } from './SideBar';
 export const Home = () => {
 
   const dispatch=useDispatch();
-  const {filterDogs,searchDog} = useSelector((state)=>state)
+  const {filterDogs,dogs,searchDog, temperamentos} = useSelector((state)=>state)
   const [dogFiltered,setDogFiltered]=useState([])
-  //estados para el paginado
-  // const [paginaInicial,setPaginaInicial]=useState(1)
-  // const [razaPorPage,setRazaPorPage]=useState(8);
-  // const ultimaRazaPage=paginaInicial * razaPorPage;
-  // const primeraRazaPage=ultimaRazaPage - razaPorPage;
-  // const paginaActual=filterDogs.slice(ultimaRazaPage,primeraRazaPage)
-
-  // const paginado=(numero)=>{
-  //   setPaginaInicial(numero)
-  // }
-  
+ 
   useEffect(()=>{
     dispatch(getRazas())
   },[])
@@ -34,14 +24,12 @@ export const Home = () => {
   useEffect(()=>{
     setDogFiltered(filterDogs?.filter(el=>(el.name.toLowerCase().includes(searchDog.toLowerCase()))))
   },[searchDog])
-  console.log(filterDogs)
-  
+
   return (
     <div >
         <div className='container'>
           <SideBar />
           <div className='containerDog'>
-          
           {
             dogFiltered.map(el=>{
               return(
@@ -51,11 +39,6 @@ export const Home = () => {
               )
             })
           }
-          {/* <Paginado
-          razaPorPage={razaPorPage}
-          filterDogs={filterDogs.length}
-          paginado={paginado}
-          /> */}
           </div>
         </div>
     </div>
