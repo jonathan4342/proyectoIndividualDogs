@@ -44,6 +44,11 @@ export const Home = () => {
       setCurrentPage( currentPage - 8)
     }
   }
+  
+  if(!dogFiltered.length){
+    return <h1>Cargando...</h1>
+  }
+
   return (
     <div >
         <div className='container'>

@@ -139,11 +139,10 @@ console.log(temp)
           <div>
           {
             
-            temp.map(el=>(
-              <button key={el} >{el}</button>
-            ))
-           
-          }
+            temp.map(el=>
+            <button onClick={()=>temp.splice(temp.indexOf(el),1)}>{el}</button>
+
+            )}
           </div>
         </div>
         <button type='button' onClick={handlePost}>Crear</button>

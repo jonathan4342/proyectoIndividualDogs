@@ -34,9 +34,12 @@ export const DogInfo = () => {
     return (
         <div className='dogInfo'>
             {
+                
                 dogs && (
-                    <div className='contenedor_img'>
-                         <img src={dogs?.data.img} alt="img not fount" width='200px' heigth='300px' />
+                        <>
+                        <div className='contenedor_img'>
+                         <img src={dogs?.data.img} alt="img not fount" width='350px' heigth='300px' />
+                         </div>
                         <div className='contenedor_datos'>
                             <h1>{dogs?.data.name}</h1>
                             <h3>Temperamentos: {dogs?.data.temperamento}</h3>
@@ -45,7 +48,11 @@ export const DogInfo = () => {
                             <h3>Años de vida: {dogs?.data.años_de_vida}</h3>
                             <button onClick={handleVolver}>Volver</button>
                         </div>
-                    </div>
+                   
+                        </>
+                        
+                   
+                        
                 )
             }
         </div>

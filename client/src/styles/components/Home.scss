@@ -1,3 +1,6 @@
+body{
+    background-color:#3282B8
+}
 .formConten{
     display: flex;
     background-color: #0F4C75;
@@ -13,6 +16,7 @@ button{
     gap:3rem;
     display:grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+
 }
 
 .dog{
@@ -27,18 +31,29 @@ button{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.contenedor_img{
-    display: flex;
-    flex-direction: row;
-    padding: 150px;
-    gap: 5rem;
-}
-
 .botones{
     display: flex;
     justify-content: center;
     gap: .3rem;
 }
+
+.dogInfo{
+    display: flex;
+    padding: 150px;
+    gap: 5rem;
+    align-items: center;
+    background-color: #BBE1FA;
+    height: 200px;
+    justify-content: center;
+    border-radius: 600px;
+    box-shadow: 5px 5px 10px;
+}
+
+
+
+
+
+
 
 
 
