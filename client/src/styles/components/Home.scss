@@ -4,16 +4,11 @@
     gap: 3rem;
     padding: 1rem .5rem;
 }
-.buttonSide{
-    cursor:pointer
+button{
+    cursor: pointer;
 }
-.buttonCrear{
-    cursor:pointer
-}
+
 .containerDog{
-    // display: flex;
-    // align-items: flex-start;
-    // gap: 3rem;
     padding-left: 3rem;
     gap:3rem;
     display:grid;
@@ -37,6 +32,12 @@
     flex-direction: row;
     padding: 150px;
     gap: 5rem;
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: .3rem;
 }
 
 

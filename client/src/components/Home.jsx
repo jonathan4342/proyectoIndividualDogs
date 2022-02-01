@@ -9,13 +9,15 @@ import { SideBar } from './SideBar';
 export const Home = () => {
 
   const dispatch=useDispatch();
-  const {filterDogs,dogs,searchDog, temperamentos} = useSelector((state)=>state)
+  const {filterDogs,searchDog} = useSelector((state)=>state)
   const [dogFiltered,setDogFiltered]=useState([])
- 
+  const [currentPage, setCurrentPage]=useState(0)
+
+
   useEffect(()=>{
     dispatch(getRazas())
   },[])
-  
+
   useEffect(()=>{
     setDogFiltered(filterDogs)
   },[filterDogs])
@@ -25,13 +27,34 @@ export const Home = () => {
     setDogFiltered(filterDogs?.filter(el=>(el.name.toLowerCase().includes(searchDog.toLowerCase()))))
   },[searchDog])
 
+  const paginado= ()=>{
+    return dogFiltered.slice(currentPage ,currentPage + 8)
+  }
+
+  const nextPage=()=>{
+    if(filterDogs?.filter(el=>(el.name.toLowerCase().includes(searchDog.toLowerCase()))).length > currentPage + 8){
+      setCurrentPage(currentPage + 8)
+
+    }
+  }
+
+  const prevPage=()=>{
+
+    if(currentPage > 0){
+      setCurrentPage( currentPage - 8)
+    }
+  }
   return (
     <div >
         <div className='container'>
           <SideBar />
+          <div className='botones'>
+          <button  onClick={prevPage}>Anterior</button>
+          <button  onClick={nextPage}>Siguiente</button>
+          </div>
           <div className='containerDog'>
           {
-            dogFiltered.map(el=>{
+            paginado().map(el=>{
               return(
               <div className='dog' key={el.id}>
                     <Dog id={el.id}name={el.name} img={el.img} peso={el.peso}temperamento={el.temperamento} temperamentos={el.temperamentos} />
@@ -40,6 +63,7 @@ export const Home = () => {
             })
           }
           </div>
+          
         </div>
     </div>
   )

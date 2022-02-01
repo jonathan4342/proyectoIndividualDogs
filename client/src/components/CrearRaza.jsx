@@ -55,6 +55,7 @@ export const CrearRaza = () => {
     navigate(-1)
 }
 
+console.log(temp)
   
    
   return (
@@ -138,7 +139,9 @@ export const CrearRaza = () => {
           <div>
           {
             
-            temp.map(el=>el + ' ')
+            temp.map(el=>(
+              <button key={el} >{el}</button>
+            ))
            
           }
           </div>
