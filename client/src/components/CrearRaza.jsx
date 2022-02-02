@@ -28,18 +28,26 @@ export const CrearRaza = () => {
     input.peso=`${PMin} - ${PMax}`
     input.altura=`${alMin} - ${alMax}`
     
-
+    if(Number(alMin)<= 0 || Number(alMax)<= 0){
+      return alert('Las aluras no pueden ser negativas o iguales a 0')
+    }
     if(Number(alMin)>Number(alMax)){
       return alert('La altura minima no puede ser mayor a la altura maxima')
     }
     else if(Number(alMin)===Number(alMax)){
       return alert('Las alturas no pueden ser las mismas')
     }
+    else if(Number(PMin)<= 0 || Number(PMax)<= 0){
+      return alert('Los pesos no pueden ser negativos o iguales a 0')
+    }
     else if(Number(PMin)>Number(PMax)){
       return alert('El peso minimo no puede ser mayor al peso maximo')
     }
     else if(Number(PMin)===Number(PMax)){
       return alert('Los pesos no pueden ser los mismos')
+    }
+    else if(Number(años_de_vida)<=0){
+      return alert('Los años de vida deben ser mayor a 0')
     }
 
     let temperamentosAenviar=input.temp.map(el=>{
